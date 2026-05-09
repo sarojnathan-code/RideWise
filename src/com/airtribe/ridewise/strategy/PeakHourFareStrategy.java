@@ -24,6 +24,7 @@ public class PeakHourFareStrategy implements FareStrategy{
 						LocalTime.now().isBefore(EVENING_PEAK_HOUR_END))  ) {
 			
 			fare = PEAKHOURS_COST_PER_KM * ride.getDistance();
+			System.out.println("Total fare for ride is "+fare);
 		}else {
 			nextHandler.calculateFare(ride); 
 		}

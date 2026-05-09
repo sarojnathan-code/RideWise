@@ -8,7 +8,9 @@ private double PEAKHOURS_COST_PER_KM = 15;
 	
 	@Override
 	public double calculateFare(Ride ride) {
-		return PEAKHOURS_COST_PER_KM * ride.getDistance();
+		double cost = PEAKHOURS_COST_PER_KM * ride.getDistance();
+		System.out.println("Total fare for ride is "+cost);
+		return cost;
 	}
 	
 	

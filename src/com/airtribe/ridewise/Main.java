@@ -54,6 +54,7 @@ public class Main {
                 	rideService.completeRide(rideId);
                     break;
                 case 5:
+                	viewRides(sc);
                     break;
                     
                 case 0:
@@ -66,5 +67,43 @@ public class Main {
 
 		}
 	}
+	
+	private static void viewRides(Scanner sc) {
+        int subChoice;
+        RideService rideService = new RideService();
+        
+        while(true) {
+            System.out.println("\n--- View Rides---");
+            System.out.println("1. View Rides by Driver");
+            System.out.println("2. View Rides by Rider");
+            System.out.println("3. View all rides");
+            System.out.println("0. Back to Main Menu");
+            System.out.print("Enter choice: ");
+            subChoice = sc.nextInt();
+
+            switch (subChoice) {
+                case 1:
+                	System.out.println("Enter driver Id to view rides");
+                	int driverId = sc.nextInt();
+                	rideService.getAllRidesByDriver(driverId);
+                    break;
+                case 2:
+                	System.out.println("Enter rider Id to view rides");
+                	int riderId = sc.nextInt();
+                	rideService.getAllRidesByRider(riderId);
+                    break;
+                case 3:
+                	rideService.getAllRides();
+                    break;
+                case 0:
+                    System.out.println("Returning to main menu...");
+                    return;
+               
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+        } 
+    }
 
 }

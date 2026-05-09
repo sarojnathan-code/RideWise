@@ -1,5 +1,7 @@
 package com.airtribe.ridewise.model;
 
+import com.airtribe.ridewise.util.IdGenerator;
+
 public class Ride {
 	
 	private int id;
@@ -72,14 +74,12 @@ public class Ride {
 		return this.getId() == ride.getId();
 	}
 
-	public Ride(int id, Rider rider, Driver driver, double distance, FareReceipt fareReceipt, RideStatus status) {
+	public Ride(Rider rider,double distance) {
 		super();
-		this.id = id;
+		this.id = IdGenerator.generateRideId();
 		this.rider = rider;
-		this.driver = driver;
 		this.distance = distance;
-		this.fareReceipt = fareReceipt;
-		this.status = status;
+		this.status = RideStatus.REQUESTED;
 	}
 	
 	
