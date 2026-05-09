@@ -5,5 +5,7 @@ import com.airtribe.ridewise.model.Ride;
 public interface FareStrategy {
 
 	double calculateFare(Ride ride);
+	
+	void setNextHandler(FareStrategy fareStrategy);
 
 }

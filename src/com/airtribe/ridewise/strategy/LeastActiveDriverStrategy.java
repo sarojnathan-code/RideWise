@@ -9,8 +9,10 @@ public class LeastActiveDriverStrategy implements RideMatchingStrategy{
 
 	@Override
 	public Driver findDriver(Rider rider, List<Driver> drivers) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return drivers.stream().min((d1,d2) -> { 
+			return Integer.compare(d1.getRideCount(), d2.getRideCount());
+		}).orElse(null);
 	}
 
 }
