@@ -2,7 +2,6 @@ package com.airtribe.ridewise.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.airtribe.ridewise.model.Driver;
 import com.airtribe.ridewise.model.Ride;
@@ -11,26 +10,41 @@ import com.airtribe.ridewise.model.Rider;
 import com.airtribe.ridewise.model.VehicleType;
 import com.airtribe.ridewise.strategy.DefaultFareStrategy;
 import com.airtribe.ridewise.strategy.FareStrategy;
+import com.airtribe.ridewise.strategy.LeastActiveDriverStrategy;
+import com.airtribe.ridewise.strategy.NearestDriverStrategy;
 import com.airtribe.ridewise.strategy.PeakHourFareStrategy;
 import com.airtribe.ridewise.strategy.RideMatchingStrategy;
 
 public class RideService {
 	
-	private List<Ride> rides = new ArrayList<>();
+	public static List<Ride> rides = new ArrayList<>();
 	
 	private RideMatchingStrategy rideMatchingStrategy;
 	
 
-	void requestRide(VehicleType vehicleType, Rider rider,int distance) {
-		Ride ride = new Ride(rider,distance);
+	public void requestRide(VehicleType vehicleType, Rider rider,int distance,String rideType) {
+		Ride ride = new Ride(rider,distance,vehicleType);
+		
+		assignDriver(rider,DriverService.drivers,rideType, ride);
 		rides.add(ride);
 	}
 	
-	Driver assignDriver(Rider rider, List<Driver> drivers) {
-		Driver driver = rideMatchingStrategy.findDriver(rider, drivers);
+	public Driver assignDriver(Rider rider, List<Driver> drivers,String rideType,Ride ride) {
+		if(rideType.equalsIgnoreCase("Prime")) {
+			rideMatchingStrategy = new NearestDriverStrategy();
+		}else {
+			rideMatchingStrategy = new LeastActiveDriverStrategy();
+		}
+		Driver driver = rideMatchingStrategy.findDriver(rider, drivers,ride);
 		
 		if(null != driver) {
 			driver.setAvailable(false);
+			
+		}
+		
+		if(ride != null) {
+			ride.setDriver(driver);
+			ride.setStatus(RideStatus.ASSIGNED);
 		}
 		return driver;
 	}
@@ -45,7 +59,7 @@ public class RideService {
 	
 	public void completeRide(int rideId) {
 		for (Ride r : rides) {
-	        if (r.getId() == rideId) {
+	        if (r.getId() == rideId && r.getStatus().equals(RideStatus.ASSIGNED)) {
 	            r.setStatus(RideStatus.COMPLETED);
 	            calculateFare(r);
 	            System.out.println("Ride completed");

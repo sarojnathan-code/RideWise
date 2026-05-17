@@ -16,6 +16,8 @@ public class Ride {
 
 	private RideStatus status;
 	
+	private VehicleType vehicleType;
+	
 
 	public RideStatus getStatus() {
 		return status;
@@ -66,6 +68,16 @@ public class Ride {
 		this.fareReceipt = fareReceipt;
 	}
 	
+	
+	
+	public VehicleType getVehicleType() {
+		return vehicleType;
+	}
+
+	public void setVehicleType(VehicleType vehicleType) {
+		this.vehicleType = vehicleType;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -74,12 +86,19 @@ public class Ride {
 		return this.getId() == ride.getId();
 	}
 
-	public Ride(Rider rider,double distance) {
+	public Ride(Rider rider,double distance,VehicleType vehicleType) {
 		super();
 		this.id = IdGenerator.generateRideId();
 		this.rider = rider;
 		this.distance = distance;
 		this.status = RideStatus.REQUESTED;
+		this.vehicleType = vehicleType;
+	}
+
+	@Override
+	public String toString() {
+		return "Ride [id=" + id + ", rider=" + rider + ", driver=" + driver + ", distance=" + distance
+				+ ", fareReceipt=" + fareReceipt + ", status=" + status + ", vehicleType=" + vehicleType + "]";
 	}
 	
 	

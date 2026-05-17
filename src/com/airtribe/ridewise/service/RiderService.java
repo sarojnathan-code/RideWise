@@ -7,7 +7,7 @@ import com.airtribe.ridewise.model.Rider;
 
 public class RiderService {
 	
-	List<Rider> riders = new ArrayList<>();
+	public static List<Rider> riders = new ArrayList<>();
 	
 	public void registerRider(Rider rider) {
 		riders.add(rider);

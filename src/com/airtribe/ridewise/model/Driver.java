@@ -42,13 +42,22 @@ public class Driver {
 	public void setRideCount(int rideCount) {
 		this.rideCount = rideCount;
 	}
-	public Driver(String name, String currentLocation) {
+	
+	
+	public VehicleType getVehicleType() {
+		return vehicleType;
+	}
+	public void setVehicleType(VehicleType vehicleType) {
+		this.vehicleType = vehicleType;
+	}
+	public Driver(String name, String currentLocation,VehicleType vehicleType) {
 		super();
 		this.name = name;
 		this.currentLocation = currentLocation;
 		this.available = true;
 		this.id = IdGenerator.generateDriverId();
 		this.rideCount = 0;
+		this.vehicleType = vehicleType;
 	}
 	
 	
@@ -59,6 +68,12 @@ public class Driver {
 		Driver driver = (Driver) o;
 		return this.getId() == driver.getId();
 	}
+	@Override
+	public String toString() {
+		return "Driver [id=" + id + ", name=" + name + ", currentLocation=" + currentLocation + ", available="
+				+ available + ", rideCount=" + rideCount + ", vehicleType=" + vehicleType + "]";
+	}
 	
 
+	
 }

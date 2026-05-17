@@ -4,9 +4,10 @@ import java.util.List;
 
 import com.airtribe.ridewise.model.Driver;
 import com.airtribe.ridewise.model.Rider;
+import com.airtribe.ridewise.model.Ride;
 
 public interface RideMatchingStrategy {
 	
-	Driver findDriver(Rider rider, List<Driver> drivers);
+	Driver findDriver(Rider rider, List<Driver> drivers,Ride ride);
 
 }

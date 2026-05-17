@@ -8,7 +8,7 @@ import com.airtribe.ridewise.model.Driver;
 
 public class DriverService {
 	
-	List<Driver> drivers = new ArrayList<>();
+	public static List<Driver> drivers = new ArrayList<>();
 	
 	public void registerDriver(Driver driver) {
 		drivers.add(driver);
@@ -27,7 +27,7 @@ public class DriverService {
 	
 	
 	public List<Driver> getAvailableDrivers(){
-		return drivers.stream().filter(d -> d.isAvailable()).collect(Collectors.toList());
+		 return drivers.stream().filter(d -> d.isAvailable()).collect(Collectors.toList());
 	}
 	
 
