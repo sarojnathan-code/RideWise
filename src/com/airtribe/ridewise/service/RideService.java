@@ -61,8 +61,8 @@ public class RideService {
 		for (Ride r : rides) {
 	        if (r.getId() == rideId && r.getStatus().equals(RideStatus.ASSIGNED)) {
 	            r.setStatus(RideStatus.COMPLETED);
-	            double fare = calculateFare(r);
-	            System.out.println("Thank you for riding with RideWise. Your fare is "+fare);
+	            calculateFare(r);
+	            System.out.println("Thank you for riding with RideWise.");
 	            return;
 	        }
 	    }
