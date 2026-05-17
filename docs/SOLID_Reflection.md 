@@ -1,0 +1,11 @@
+SOLID Principles:
+
+SRP: Single-purpose classes (RideService, DriverService, FareCalculator)
+
+OCP: Adding new ride selection or pricing strategies without modifying core logic
+
+LSP: Any strategy implementation must remain interchangeable
+
+ISP: Small focused interfaces (RideMatchingStrategy, FareStrategy)
+
+DIP: Services depend on interfaces — not concrete classes
