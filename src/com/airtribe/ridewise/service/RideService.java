@@ -49,11 +49,11 @@ public class RideService {
 		return driver;
 	}
 	
-	void calculateFare(Ride ride) {
+	double calculateFare(Ride ride) {
 		FareStrategy defaultFareStrategy = new DefaultFareStrategy();
 		FareStrategy peakHourFareStrategy = new PeakHourFareStrategy();
 		peakHourFareStrategy.setNextHandler(defaultFareStrategy);
-		peakHourFareStrategy.calculateFare(ride);
+		return peakHourFareStrategy.calculateFare(ride);
 		
 	}
 	
@@ -61,8 +61,8 @@ public class RideService {
 		for (Ride r : rides) {
 	        if (r.getId() == rideId && r.getStatus().equals(RideStatus.ASSIGNED)) {
 	            r.setStatus(RideStatus.COMPLETED);
-	            calculateFare(r);
-	            System.out.println("Ride completed");
+	            double fare = calculateFare(r);
+	            System.out.println("Thank you for riding with RideWise. Your fare is "+fare);
 	            return;
 	        }
 	    }
